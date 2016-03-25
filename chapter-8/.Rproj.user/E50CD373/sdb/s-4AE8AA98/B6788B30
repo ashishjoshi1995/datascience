@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tree)\nlibrary(ISLR)\nattach(Carseats)\nhigh = ifelse(Sales>8,\"Yes\",\"No\")\nCarseats = data.frame(Carseats,high)\ntree.carseats<-tree(high~.-Sales,Carseats)\nsummary(tree.carseats)\nplot(tree.carseats)\ntext(tree.carseats)\n\n#randomly sampling 200 out of 400 observations from data\n#seperating into test and training data\n\nattach(Carseats)\nnames(Carseats)\nset.seed(2)\ntrain.sample = sample(1:nrow(Carseats),200)\ntrain.data = Carseats[train.sample,]\ntest.data = Carseats[-train.sample,]\ntree.carseats =tree(high~.-Sales,Carseats,subset=train.sample)\ntree.pred=predict(tree.carseats ,test.data ,type=\"class\")\n\ntable(test.data$high,tree.pred)\nx<-cv.tree(tree.carseats,FUN = prune.misclass)\nx\n\nprune.carseats= prune.misclass(tree.carseats,best = 9)\nplot(prune.carseats)\ntext(prune.carseats)\ntree2.pred = predict(prune.carseats,test.data,type = 'class')\ntable(tree2.pred,test.data$high)\n  \n#fitting regression tree over Boston data set in library MASS\nlibrary(MASS)\nset.seed(1)\ntrain.index = sample(1:nrow(Boston),nrow(Boston)/2)\ntest.data2 = Boston[-train.index,]\ntree.boston = tree(medv~.,Boston,subset = train.index)\nsummary(tree.boston)\n\nplot(tree.boston)\ntext(tree.boston)\n\ncv.boston = cv.tree(tree.boston)\nsummary(cv.boston)\n#cv.boston2 = cv.tree(tree.boston,FUN = prune.misclass)\n#shows error as prune.misclass is only for classification trees\n#summary(cv.boston2)\n\nplot(cv.boston$size,cv.boston$dev,type='b')\n#5,6,7 look good\n#5\n\nprune.boston = prune.tree(tree.boston,best = 5)\nplot(prune.boston)\ntext(prune.boston,pretty = 0)\nyhat = predict(tree.boston,data=test.data2)\nplot(yhat,test.data2$medv)\ncor(yhat,test.data2$medv)\nmean(yhat)\nmean(test.data2$medv)\n\n\n#Bagging and Random Forest\nlibrary(randomForest)\nset.seed(1)\ntrain.index3 = sample(1:nrow(Boston),nrow(Boston)/2)\ntest.data3 = Boston[-train.index3,]\nboston.bagging = randomForest(medv~.,data=Boston,subset = train.index3,mtry=13,importance = T)\npredict.bagging = predict(boston.bagging,test.data3)\nplot(predict.bagging,test.data3$medv)\nabline(0,1)\n#RSS\nmean((predict.bagging-test.data3$medv)^2)\n\nboston.bagging2 = randomForest(medv~.,data=Boston,subset = train.index3,mtry=6,ntree=25,importance=T)\npredict.bagging2 = predict(boston.bagging2,test.data3)\nplot(predict.bagging2,test.data3$medv)\nmean((predict.bagging2-test.data3$medv)^2)\nimportance(boston.bagging2)\nvarImpPlot(boston.bagging2)\n\n#Boosting\nlibrary(gbm)\n#lambda = 0.001 by default else shrinkage can be set for lambda.\n?gbm\nset.seed(1)\nboost.boston=gbm(medv~.,data = Boston[train.index,],distribution = \"gaussian\",n.trees = 5000,interaction.depth = 4)",
+    "created" : 1458823063888.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3566643214",
+    "id" : "B6788B30",
+    "lastKnownWriteTime" : 1458928890,
+    "last_content_update" : 1458928890136,
+    "path" : "F:/Data Science/chapter-8/chap8.R",
+    "project_path" : "chap8.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(1)\nx= matrix(rnorm(20*2),ncol=2)\ny=c(rep(-1,10),rep(1,10))\nx[y==1,]<-x[y==1,]+1\nplot(x, col=(3-y))\nhist(x)\n\ndat = data.frame(x=x,y=as.factor(y))\ndat\nlibrary(e1071)\nsvmfit = svm(y~.,data=dat,kernel=\"linear\",cost=10,scale=T)\nplot(svmfit,dat)\n",
+    "created" : 1458929178310.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3586332142",
+    "id" : "86676737",
+    "lastKnownWriteTime" : 1458945507,
+    "last_content_update" : 1458945507333,
+    "path" : "F:/Data Science/chapter-8/svm.R",
+    "project_path" : "svm.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

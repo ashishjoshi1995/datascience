@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(DMwR)\ndata(algae)\n\nlibrary(car)\npar(mfrow=c(1,2))\nhist(algae$mxPH,prob=T,ylim = 0:1)\nlines(density(algae$mxPH,na.rm = T))\nqq.plot(algae$mxPH)",
+    "created" : 1458720661040.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1896610310",
+    "id" : "B8656030",
+    "lastKnownWriteTime" : 1458724074,
+    "last_content_update" : 1458724074979,
+    "path" : "F:/Data Science/algae/algaeTest.R",
+    "project_path" : "algaeTest.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

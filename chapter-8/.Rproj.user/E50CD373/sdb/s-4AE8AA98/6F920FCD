@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "  library(MASS)\n  library(ISLR)\n  fix(Boston)\n  lm.fit = lm(medv~lstat,data = Boston)\n  confint(lm.fit)\n  ",
+    "contents" : "  library(MASS)\n  library(ISLR)\n  fix(Boston)\n  lm.fit = lm(medv~lstat,data = Boston)\n  confint(lm.fit)\n  summary(lm.fit)\n  #for lstat we obtained a high t value and a low pvalue, it may matter, \n  #it can be checked by correlation if in multiple LR p value comes high.\n  \n  #checking age\n  lm.fit = lm(medv~age,data = Boston)\n  summary(lm.fit)\n  #sufficient t value and p value , therefore applying multiple LR\n  \n  lm.fit = lm(medv~lstat+age,data=Boston)\n  summary(lm.fit)\n  # p vlue is sufficiently small to consider the model still checking the correlation of vars\n  attach (Boston)\n  cor(lstat,age)\n  \n  #dividing data\n  train.indexMLR = sample(1:nrow(Boston),400)\n  test.dataMLR = Boston[-train.indexMLR,]\n  #trying out with all other vars, best strategy\n  lm.fit = lm(medv~.,data=Boston,subset = train.indexMLR)\n  outcome = predict(lm.fit,data.frame( test.dataMLR))\n  cor(outcome,test.dataMLR$medv)\n  plot(outcome,test.dataMLR$medv)  \n  summary(lm.fit)\n  #age and indus have a very high p value thus can be removed\n  lm.fit2 = lm(medv~.-age-indus,data=Boston,subset = train.indexMLR)\n  outcome2 = predict(lm.fit2,data.frame(test.dataMLR))\n  cor(outcome2,test.dataMLR$medv)\n  summary(lm.fit2)\n  summary(lm.fit2)$sigma\n  summary(lm.fit)$sigma\n  rss = mean((outcome-test.dataMLR$medv)^2)\n  rss2 = mean((outcome2-test.dataMLR$medv)^2)\n  rss\n  rss2\n  #almost identical\n  \n  \n  #trying nonlinear terms\n  \n  #Qualitative\n  library(ISLR)\n  \n  lm.fit3 = lm(Sales~.+Income:Advertising+Price:Age,data=Carseats)\n  summary(lm.fit3)\n  #price:Age,USYes,Education,Population must be removed\n  \n  lm.fit3Mod = lm(Sales~.+Income:Advertising-Age-Education-Population,data = Carseats)\n  ",
     "created" : 1458945514959.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2381699018",
+    "hash" : "220026641",
     "id" : "6F920FCD",
-    "lastKnownWriteTime" : 1458945808,
-    "last_content_update" : 1458945808443,
+    "lastKnownWriteTime" : 1459022636,
+    "last_content_update" : 1459022636979,
     "path" : "F:/Data Science/chapter-8/LR.R",
     "project_path" : "LR.R",
     "properties" : {

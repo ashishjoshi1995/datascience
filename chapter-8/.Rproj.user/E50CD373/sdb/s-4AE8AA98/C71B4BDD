@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ISLR)\nnames(Smarket)\nsummary(Smarket)\ncor(Smarket[,-9])\nattach(Smarket)\nplot(Volume)\n\n#logistic Regression\nglm.fit = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,family = binomial,data=Smarket)\nsummary(glm.fit)\ncoef(glm.fit)\nsummary(glm.fit)$coef\n\n#data division\nset.seed(2)\ntrain.indexSMKT = sample() \n",
+    "created" : 1459009789187.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2195992644",
+    "id" : "C71B4BDD",
+    "lastKnownWriteTime" : 1459024387,
+    "last_content_update" : 1459024387659,
+    "path" : "F:/Data Science/chapter-8/stockMkt.R",
+    "project_path" : "stockMkt.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

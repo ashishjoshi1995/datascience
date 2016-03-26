@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "set.seed(1)\nx= matrix(rnorm(20*2),ncol=2)\ny=c(rep(-1,10),rep(1,10))\nx[y==1,]<-x[y==1,]+1\nplot(x, col=(3-y))\nhist(x)\n\ndat = data.frame(x=x,y=as.factor(y))\ndat\nlibrary(e1071)\nsvmfit = svm(y~.,data=dat,kernel=\"linear\",cost=10,scale=T)\nplot(svmfit,dat)\nsummary(svmfit)\nnames(svmfit)\n\nset.seed(1)\ntune.test = tune(svm,y~.,data = dat,kernel=\"linear\",ranges = list(cost = c(0.001,0.01,0.1,1,5,10,100)))\nsummary(tune.test)\ntunemodel.best = tune.test$best.model\n\n#generating a test dataset\nxtest = matrix(rnorm(20*2),ncol=2)\nytest = sample(c(-1,1),20,rep = T)\n#this line is written to make the 2 classes linearly seperable\nxtest[ytest==1,]=xtest[ytest==1,]+1\ntest.data4 = data.frame(x=xtest,y=as.factor(ytest))\n\n#predictiom\nypred = predict(tunemodel.best,test.data4)\ntable(ypred,test.data4$y)\n\nx[y==1,]=x[y==1,]+.5\ndata2 = data.frame(x=x,y=as.factor(y))\nsvmfit = svm(y~.,data = data2,kernel='linear',cost = 1e5)\nplot(svmfit,data2)\n",
+    "contents" : "set.seed(1)\nx= matrix(rnorm(20*2),ncol=2)\ny=c(rep(-1,10),rep(1,10))\nx[y==1,]<-x[y==1,]+1\nplot(x, col=(3-y))\nhist(x)\n\ndat = data.frame(x=x,y=as.factor(y))\ndat\nlibrary(e1071)\nsvmfit = svm(y~.,data=dat,kernel=\"linear\",cost=10,scale=T)\nplot(svmfit,dat)\nsummary(svmfit)\nnames(svmfit)\n\nset.seed(1)\ntune.test = tune(svm,y~.,data = dat,kernel=\"linear\",ranges = list(cost = c(0.001,0.01,0.1,1,5,10,100)))\nsummary(tune.test)\ntunemodel.best = tune.test$best.model\n\n#generating a test dataset\nxtest = matrix(rnorm(20*2),ncol=2)\nytest = sample(c(-1,1),20,rep = T)\n#this line is written to make the 2 classes linearly seperable\nxtest[ytest==1,]=xtest[ytest==1,]+1\ntest.data4 = data.frame(x=xtest,y=as.factor(ytest))\n\n#predictiom\nypred = predict(tunemodel.best,test.data4)\ntable(ypred,test.data4$y)\n\nx[y==1,]=x[y==1,]+.5\ndata2 = data.frame(x=x,y=as.factor(y))\nsvmfit = svm(y~.,data = data2,kernel='linear',cost = 1e5)\nplot(svmfit,data2)\n\n#generating nonlinear data\nset.seed(1)\nx = matrix(rnorm(200*2),ncol=2)\nx[1:100,] = x[1:100]+2\nx[101:150] = x[101:150]-2\ny = c(rep(1,150),rep(2,50))\ndata.train1 = data.frame(x=x,y=as.factor(y))\nplot(x,col=y)\ntrain=sample (200,100) \nsvmfit=svm(y~., data=data.train1[train ,], kernel=\"radial\", gamma=1, cost=1) \nplot(svmfit , dat[train ,])\ntune.out=tune(svm , y~., data=data.train1[train ,], kernel=\"radial\", ranges=list(cost=c(0.1,1,10,100,1000), gamma=c(0.5,1,2,3,4))) \nsummary(tune.out)\n\n#ROC Curves\n\n",
     "created" : 1458929178310.000,
     "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1990738132",
+    "hash" : "504129195",
     "id" : "86676737",
-    "lastKnownWriteTime" : 1458945507,
-    "last_content_update" : 1458977772485,
+    "lastKnownWriteTime" : 1458985020,
+    "last_content_update" : 1459009785406,
     "path" : "F:/Data Science/chapter-8/svm.R",
     "project_path" : "svm.R",
     "properties" : {

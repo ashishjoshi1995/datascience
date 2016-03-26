@@ -1,14 +1,14 @@
 {
     "collab_server" : "",
-    "contents" : "library(ISLR)\nnames(Smarket)\nsummary(Smarket)\ncor(Smarket[,-9])\nattach(Smarket)\nplot(Volume)\n\n#logistic Regression\nglm.fit = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,family = binomial,data=Smarket)\nsummary(glm.fit)\ncoef(glm.fit)\nsummary(glm.fit)$coef\n\n#data division\nset.seed(2)\ntrain.indexSMKT = sample() \n",
+    "contents" : "library(ISLR)\nnames(Smarket)\nsummary(Smarket)\ncor(Smarket[,-9])\nattach(Smarket)\nplot(Volume)\n\n#logistic Regression\nglm.fit = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,family = binomial,data=Smarket)\nsummary(glm.fit)\ncoef(glm.fit)\nsummary(glm.fit)$coef\n\n#data division\nset.seed(2)\ntrain.indexSMKT = sample(1:nrow(Smarket),1000)\ntest.dataSMKT = Smarket[-train.indexSMKT,]\nglm.fit1 = glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,family = binomial,data=Smarket,subset = train.indexSMKT)\nlogistic = predict(glm.fit,data.frame(test.dataSMKT),type = \"response\")\nplot(logistic,test.dataSMKT$Direction)\npred = rep(\"Down\",length(logistic))\npred[logistic>.5] = \"Up\"\n#pred = data.frame(logistic,rep(\"Down\",length(logistic)))\ntable(pred,test.dataSMKT$Direction)\n\nlibrary (MASS)\nlda.fit=lda(Direction~Lag1+Lag2 ,data=Smarket ,subset=train.indexSMKT)\n\nqda.fit=qda(Direction~Lag1+Lag2 ,data=Smarket ,subset=train.indexSMKT) \n",
     "created" : 1459009789187.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2195992644",
+    "hash" : "1632837556",
     "id" : "C71B4BDD",
-    "lastKnownWriteTime" : 1459024387,
-    "last_content_update" : 1459024387659,
+    "lastKnownWriteTime" : 1459026644,
+    "last_content_update" : 1459026644037,
     "path" : "F:/Data Science/chapter-8/stockMkt.R",
     "project_path" : "stockMkt.R",
     "properties" : {
